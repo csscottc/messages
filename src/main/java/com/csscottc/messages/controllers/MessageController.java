@@ -24,8 +24,8 @@ public class MessageController {
     IMessageBusinessLogic _messageBusinessLogic;
 
     @RequestMapping(method = RequestMethod.GET)
-    public Message getMessage(){
-        return _messageBusinessLogic.getMessage("588efc2d1c29891be1ae65ca");
+    public Message getMessage(@RequestParam String id){
+        return _messageBusinessLogic.getMessage(id);
     }
 
     @RequestMapping(method = RequestMethod.POST)
