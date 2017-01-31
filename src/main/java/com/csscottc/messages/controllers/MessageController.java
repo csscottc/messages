@@ -21,7 +21,7 @@ public class MessageController {
     }
 
     @Inject
-    IMessageBusinessLogic _messageBusinessLogic;
+    final private IMessageBusinessLogic _messageBusinessLogic;
 
     @RequestMapping(method = RequestMethod.GET)
     public Message getMessage(@RequestParam String id){

@@ -1,21 +1,24 @@
 package com.csscottc.messages.repository;
 
+import com.csscottc.messages.models.Message;
 import com.csscottc.messages.repository.interfaces.IRepository;
+import com.csscottc.messages.repository.qualifiers.MongoDB;
 import com.google.gson.Gson;
 
-import javax.inject.Named;
+
 
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
-import com.csscottc.messages.models.Message;
 
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import static com.mongodb.client.model.Filters.*;
 
-@Named
+import javax.inject.Named;
+
+@Named @MongoDB
 public class MongoMessageRepository implements IRepository<Message> {
     public void save(Message message){
         try(MongoClient mongoClient = new MongoClient("localhost",27017)){ 
@@ -29,16 +32,18 @@ public class MongoMessageRepository implements IRepository<Message> {
             System.out.println(err);
         }
     }
+
     public void update(Message message){
 
     }
+
     public Message getById(String id){
         Message returnMessage = null;
         try(MongoClient mongoClient = new MongoClient("localhost",27017)){
             MongoDatabase mongoDatabase = mongoClient.getDatabase("csscottc-messages");
             MongoCollection<Document> mongoCollection = mongoDatabase.getCollection("messages");
             ObjectId dbid = new ObjectId(id);
-            String result = mongoCollection.find(eq("_id",dbid)).first().toJson();
+            String result = mongoCollection.find(eq("_id", dbid)).first().toJson();
             Gson gson = new Gson();
             Message msg = gson.fromJson(result, Message.class);
             return msg;
@@ -47,6 +52,7 @@ public class MongoMessageRepository implements IRepository<Message> {
             return returnMessage;
         }
     }
+
     public void remove(Message message){
 
     }
