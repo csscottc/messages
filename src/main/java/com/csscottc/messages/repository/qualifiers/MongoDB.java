@@ -14,4 +14,5 @@ import javax.inject.Qualifier;
 @Qualifier
 @Retention(RUNTIME)
 @Target({TYPE, METHOD, FIELD, PARAMETER})
-public @interface MongoDB {}
+public @interface MongoDB {
+}

@@ -20,6 +20,7 @@ import javax.inject.Named;
 
 @Named @MongoDB
 public class MongoMessageRepository implements IRepository<Message> {
+
     public void save(Message message){
         try(MongoClient mongoClient = new MongoClient("localhost",27017)){ 
             MongoDatabase mongoDatabase = mongoClient.getDatabase("csscottc-messages");
